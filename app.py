@@ -10,11 +10,17 @@ def index():
 
 @app.route('/get_price', methods=['POST'])
 def get_price():
-    asset_pair = request.form['asset_pair']
-    # Setup Web3 and chainlink-web3 (use appropriate contract address and API)
+    contract_address = request.form['contract_address']
+    # Setup Web3 and chainlink-web3
     w3 = Web3(Web3.HTTPProvider('https://mainnet.infura.io/v3/YOUR_INFURA_KEY'))
     chainlink = ChainlinkUtils(w3=w3)
-    price = chainlink.get_price(asset_pair)  # Modify as per the actual usage
+    
+    # Here, use the contract address to fetch the price
+    # This might involve using a specific method of the ChainlinkUtils class
+    # or directly interacting with the contract at the given address
+    # The exact implementation depends on how the ChainlinkUtils class is designed
+    price = chainlink.get_price(contract_address)  # Modify based on actual method
+
     return jsonify({'price': price})
 
 if __name__ == '__main__':

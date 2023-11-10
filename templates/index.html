@@ -2,14 +2,14 @@
 <html>
 
 <head>
-    <title>Asset Price Checker</title>
+    <title>Contract Price Checker</title>
     <!-- Include CSS and JavaScript here -->
 </head>
 
 <body>
-    <h1>Check Asset Pair Price</h1>
+    <h1>Check Contract Price</h1>
     <form id="priceForm">
-        <input type="text" id="assetPair" placeholder="Enter asset pair (e.g., ETH/USD)">
+        <input type="text" id="contractAddress" placeholder="Enter contract address (e.g., 0x72AFA...)">
         <button type="submit">Get Price</button>
     </form>
     <div id="result"></div>
@@ -22,7 +22,7 @@
                 $.ajax({
                     url: '/get_price',
                     type: 'post',
-                    data: { asset_pair: $('#assetPair').val() },
+                    data: { contract_address: $('#contractAddress').val() },
                     success: function (response) {
                         $('#result').html('Price: ' + response.price);
                     }
