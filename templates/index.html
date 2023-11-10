@@ -7,7 +7,8 @@
 </head>
 
 <body>
-    <h1>Check Contract Price</h1>
+    <h1>Check Asset Price</h1>
+    <h2>Enter Ethereum mainnet contract address:</h2>
     <form id="priceForm">
         <input type="text" id="contractAddress" placeholder="Enter contract address (e.g., 0x72AFA...)">
         <button type="submit">Get Price</button>
@@ -24,12 +25,33 @@
                     type: 'post',
                     data: { contract_address: $('#contractAddress').val() },
                     success: function (response) {
-                        $('#result').html('Price: ' + response.price);
+                        if (response.price && response.price.answer) {
+                            var answer = response.price.answer;
+                            var priceInUSD = answer / 100000000; // Dividing by 10^8
+
+                            // Formatting the number as a currency value
+                            var formattedPrice = new Intl.NumberFormat('en-US', {
+                                style: 'currency',
+                                currency: 'USD',
+                            }).format(priceInUSD);
+
+                            $('#result').html('Price in USD: ' + formattedPrice);
+                        } else {
+                            $('#result').html('Error: ' + (response.error || 'Unknown error'));
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        $('#result').html('Error: ' + error);
                     }
                 });
             });
         });
     </script>
+
+
+
+
+
 </body>
 
 </html>

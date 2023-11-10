@@ -12,16 +12,17 @@ def index():
 def get_price():
     contract_address = request.form['contract_address']
     # Setup Web3 and chainlink-web3
-    w3 = Web3(Web3.HTTPProvider('https://mainnet.infura.io/v3/YOUR_INFURA_KEY'))
+    w3 = Web3(Web3.HTTPProvider('https://mainnet.infura.io/v3/efd567867c2d402aabae90e5eb57d24e'))
     chainlink = ChainlinkUtils(w3=w3)
     
-    # Here, use the contract address to fetch the price
-    # This might involve using a specific method of the ChainlinkUtils class
-    # or directly interacting with the contract at the given address
-    # The exact implementation depends on how the ChainlinkUtils class is designed
-    price = chainlink.get_price(contract_address)  # Modify based on actual method
-
-    return jsonify({'price': price})
+    try:
+        # Use the contract address to fetch the price
+        price = chainlink.get_price(contract_address)
+        return jsonify({'price': price})
+    except Exception as e:
+        # Log the error and send an error response
+        app.logger.error(f"Error fetching price: {e}")
+        return jsonify({'error': 'Error fetching price'}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
