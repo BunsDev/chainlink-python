@@ -1,8 +1,6 @@
-# flask-hello-world
+# Chainlink Python Sample
 
-[![license](https://img.shields.io/github/license/gAmadorH/flask-hello-world.svg?color=blue)](https://github.com/gAmadorH/flask-hello-world/blob/master/LICENSE)
-
-A simple Flask hello world application.
+A simple python app using [web3.py](https://github.com/ethereum/web3.py) and [Web3.py Chainlink library](https://github.com/kalmiallc/chainlink-web3)
 
 ## Requirements
 
@@ -59,27 +57,6 @@ Werkzeug==1.0.1
 
 WOW Flask has very few dependencies to be a web application framework,  
 it is because Flask is a `microframework`
-
-## Create a Hello World app
-
-Create a main file call `main.py` (The name does not matter, it could be another).
-
-```bash
-touch main.py
-```
-
-And then put the next code:
-
-```python
-from flask import Flask
-
-app = Flask(__name__)
-
-
-@app.route('/')
-def hello():
-  return 'Hello world with Flask'
-```
 
 ## Run your new app
 
