@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Asset Price Checker</title>
+    <!-- Include CSS and JavaScript here -->
+</head>
+
+<body>
+    <h1>Check Asset Pair Price</h1>
+    <form id="priceForm">
+        <input type="text" id="assetPair" placeholder="Enter asset pair (e.g., ETH/USD)">
+        <button type="submit">Get Price</button>
+    </form>
+    <div id="result"></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#priceForm').on('submit', function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: '/get_price',
+                    type: 'post',
+                    data: { asset_pair: $('#assetPair').val() },
+                    success: function (response) {
+                        $('#result').html('Price: ' + response.price);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
